@@ -1,0 +1,109 @@
+.visa-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #080c25;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.divs-box{
+    padding-top: 8px;
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.start-section{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 64px;
+}
+.visa-buttons{
+    width: 90vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    bottom: 16px;
+}
+.visa-btn{
+    font-size: 18px;
+    width: 90vw;
+    margin-top: 32px;
+    height: 60px;
+    border: none;
+    border-radius: 8px;
+    padding: 0 14px;
+    background-color: #9B39FD;
+    color: #ffffff;
+    font-weight: 500;
+    width: 100%;
+}
+.wizard-start{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.wizard{
+    display: flex;
+    
+}
+.img1{
+    background-image: url("../../assets/img/Wizard/pendWizard.png");
+    width: 32px;
+    height: 66px;
+    background-repeat: no-repeat;
+    margin-right: 8px;
+}
+
+.img2{
+    background-image: url("../../assets/img/Wizard/noSelectWizard.png");
+    width: 32px;
+    height: 66px;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+    margin-right: 8px;
+}
+
+.img3{
+    background-image: url("../../assets/img/Wizard/finishWizardnoDone.png");
+    width: 32px;
+    height: 66px;
+    background-repeat: no-repeat;
+    margin-left: 4px;
+    margin-right: 8px;
+}
+.wizard-title{
+    font-family: Inter-medium , sans-serif;
+    font-weight: 500;
+    color: #9B39FD;
+    font-size: 14px;
+}
+
+.wizard-desc{
+    font-family: Inter-Medium , sans-serif;
+    color: #667085;
+    font-size: 14px;
+}
+.text-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 34px;
+}
