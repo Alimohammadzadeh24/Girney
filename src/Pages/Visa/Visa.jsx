@@ -1,15 +1,22 @@
-import React from 'react'
+import React , {useState} from 'react'
 import MenuVisa from '../../assets/img/menuVisa.png'
 import Avatar from '../../assets/img/Avatar.png'
 import './Visa.css'
+import SelectOrigin from '../../components/SelectOrigin/SelectOrigin'
 
-function visa() {
+function Visa() {
+    const [showOriginSelector , setShowOriginSelector] = useState(false)
+
+    const showSelectOrigin = () => {
+        setShowOriginSelector(true)
+    }
     return (
         <div className='visa-container'>
+            { showOriginSelector === true ? <SelectOrigin Closer={setShowOriginSelector}/> : null}
             <div className="divs-box">
                 <div className='header'>
-                    <img src={MenuVisa} />
-                    <img src={Avatar} />
+                    <img src={MenuVisa} alt="" />
+                    <img src={Avatar}  alt=""/>
                 </div>
                 <div className="start-section">
                     <span className='title-txts'>Start your Girney</span>
@@ -39,7 +46,7 @@ function visa() {
                     </div>
                 </div>
                 <div className="visa-buttons">
-                    <button className='visa-btn'>Enter Your Origin</button>
+                    <button onClick={showSelectOrigin} className='visa-btn'>Enter Your Origin</button>
                     <button className='visa-btn'>Enter your Destination</button>
                     <button className='visa-btn'>Continue</button>
                 </div>
@@ -48,4 +55,4 @@ function visa() {
     )
 }
 
-export default visa
+export default Visa
