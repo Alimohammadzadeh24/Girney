@@ -3,6 +3,7 @@ import MenuVisa from '../../assets/img/menuVisa.png'
 import Avatar from '../../assets/img/Avatar.png'
 import './Visa.css'
 import SelectOrigin from '../../components/SelectOrigin/SelectOrigin'
+import $ from 'jquery'
 
 function Visa() {
     const [showOriginSelector , setShowOriginSelector] = useState(false)
@@ -46,9 +47,9 @@ function Visa() {
                     </div>
                 </div>
                 <div className="visa-buttons">
-                    <button onClick={showSelectOrigin} className='visa-btn'>Enter Your Origin</button>
-                    <button className='visa-btn'>Enter your Destination</button>
-                    <button className='visa-btn'>Continue</button>
+                    <button id='btn1' onClick={showSelectOrigin} className='visa-btn'>Enter Your Origin</button>
+                    <button id='btn2' className='visa-btn' disabled>Enter your Destination</button>
+                    <button id='btn3' className='visa-btn' disabled>Continue</button>
                 </div>
             </div>
         </div>

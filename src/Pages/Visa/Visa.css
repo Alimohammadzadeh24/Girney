@@ -46,11 +46,20 @@
     border: none;
     border-radius: 8px;
     padding: 0 14px;
-    background-color: #9B39FD;
-    color: #ffffff;
+    background-color: #C082FE;
+    color: #5502A8;
     font-weight: 500;
     width: 100%;
 }
+#btn3{
+    background-color: #9B39FD;
+    color: #ffffff;
+}
+#btn3:disabled{
+    background-color: #EDDBFF;
+    color: #98A2B3;
+}
+
 .wizard-start{
     width: 100%;
     display: flex;
@@ -106,4 +115,9 @@
     justify-content: center;
     align-items: flex-start;
     margin-bottom: 34px;
+}
+.visa-btn:disabled{
+    opacity: 50%;
+    background-color: #EDDBFF;
+    color: #98A2B3;
 }
