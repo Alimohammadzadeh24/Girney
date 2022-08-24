@@ -1,31 +1,39 @@
 import React from 'react'
 import FlyAirplane from '../../assets/img/flyAirplane.png'
 import Avatars from '../../assets/img/FinalAvatars.png'
+import { Icon } from '@iconify/react';
+import './Final.css'
 
 function Final() {
-  return (
-    <div className='final-container'>
-        <header>
-            <h3>Final Step</h3>
-        </header>
-        <h4>By pressing on the butten below, you will get the link that you need to travel from london to los angles .</h4>
-        <div className='fly-box'>
-            <div className='country-city'></div>
-            <img src={FlyAirplane} alt="" />
-            <div className='country-city'></div>
+    return (
+        <div className='final-container'>
+            <div className='final-header'>
+                <Icon style={{ color: "#ffffff", fontSize: "32px" }} icon="eva:arrow-ios-back-outline" />
+                <span style={{ position: "absolute", left: "0", right: "0" }} className='title-txts'>Final Step</span>
+                <span> </span>
+            </div>
+            <span style={{ width: "90vw" }} className='ch-txts'>By pressing on the butten below, you will get the link that you need to travel from london to los angles .</span>
+            <div className='fly-box'>
+                <div style={{marginBottom : "16px"}} className='country-city'>
+                    <span className='title-txts'>London</span>
+                </div>
+                <img src={FlyAirplane} alt="" />
+                <div style={{marginTop : "16px"}} className='country-city'>
+                    <span className='title-txts'>LosAngles</span>
+                </div>
+            </div>
+            <div className='shareLink-box'>
+                <img style={{ width: "120px" }} src={Avatars} alt="" />
+                <span className='share-title'>Need to share This Link ??</span>
+                <span className='share-desc'>By pressing on the button you can share this link to your friends as well .</span>
+                <button className='share-btn'>
+                    <span>Share</span>
+                    {/* Share Icon */}
+                </button>
+            </div>
+            <button style={{ width: "90vw", position: "absolute", bottom: "0" }} className='Continue-btn'>Go to the Website</button>
         </div>
-        <div className='shareLink-box'>
-            <img src={Avatars} alt="" />
-            <h3>Need to share This Link ??</h3>
-            <h4>By pressing on the button you can share this link to your friends as well .</h4>
-            <button>
-                <h3>Share</h3>
-                {/* Share Icon */}
-            </button>
-        </div>
-        <button>Go to the Website</button>
-    </div>
-  )
+    )
 }
 
 export default Final
