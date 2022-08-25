@@ -55,3 +55,41 @@
     border: none;
     font-weight: 500;
 }
+@media (max-height : 720px) {
+    .shareLink-box {
+        margin: 0 5vw;
+        height: 32vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        background: linear-gradient(90deg, #7f56d9 0%, #9e77ed 100%);
+        border-radius: 16px;
+        align-items: center;
+        padding: 24px;
+        position: relative;
+    }
+    .share-title{
+        font-family: Inter-Medium , sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+        margin: 0;
+        color: #ffffff;
+    }
+    .share-btn{
+        background-color: #5502A8;
+        width: 113px;
+        height: 44px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        border: none;
+        font-weight: 500;
+        position: absolute;
+        bottom: 8px;
+    }
+    .fly-box {
+        margin: 8px 0;
+    }
+}
