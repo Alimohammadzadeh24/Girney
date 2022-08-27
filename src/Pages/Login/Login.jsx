@@ -5,6 +5,7 @@ import FacebookIcon from '../../assets/img/FaceIcon.png'
 import './Login.css'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css'
+import toast, { Toaster } from 'react-hot-toast';
 
 function Login() {
   const [phone, setPhone] = useState("")
@@ -15,9 +16,16 @@ function Login() {
   const sendReq = async (e) =>{
     e.preventDefault();
     console.log(phone);
+    if (phone === "") {
+      toast.error("Please Enter your phone number")
+    }
   }
   return (
     <div className='Login-container'>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
       <div className="main-box">
         <div className="top-section">
           <img style={{ width: "48px", marginBottom: "24px" }} src={Logo} alt="" />
