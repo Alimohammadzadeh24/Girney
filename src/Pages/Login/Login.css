@@ -61,6 +61,7 @@ hr {
 
 .or {
     display: flex;
+    align-items: center;
     color: #667085;
 }
 .btns {

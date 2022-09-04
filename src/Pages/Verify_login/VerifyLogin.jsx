@@ -4,10 +4,14 @@ import MessageIcon from '../../assets/img/MessageIcon.png'
 import toast, { Toaster } from 'react-hot-toast';
 // import $ from 'jquery'
 import VerificationInput from "react-verification-input";
+import { Icon } from '@iconify/react';
 function VerifyLogin() {
   const LoginButton = (e) => {
     e.preventDefault();
     toast.error("Please Enter The Right Code")
+  }
+  const backToLogin = () => {
+    window.location.href = "/login"
   }
   return (
     <div className='VerifyLogin-container'>
@@ -24,10 +28,10 @@ function VerifyLogin() {
           <span className='ch-txts'>we sent a code to 098123456788</span>
         </div>
         <div className="verify-section">
-          <div style={{marginBottom : "26px"}}>
+          <div style={{ marginBottom: "26px" }}>
             <VerificationInput
-            placeholder=' '
-            length={6}
+              placeholder=' '
+              length={6}
               classNames={{
                 container: "container-v",
                 character: "character-v",
@@ -46,7 +50,17 @@ function VerifyLogin() {
             <img src={GmailIcon} alt="" />
             <h3>Opening Gmail App</h3>
           </div> */}
-          <span className='ch-txts'>Back to log in</span>
+          <span
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+            onClick={backToLogin}
+            className='ch-txts'
+          >
+            <Icon style={{ marginRight: "4px" }} icon="eva:arrow-back-outline" />Back to log in
+          </span>
         </div>
       </div>
     </div>

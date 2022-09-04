@@ -31,7 +31,6 @@ function SelectOrigin({ Closer }) {
 
   const checkValueInput = (e) => {
     //this line for develop
-    console.log(e.target.value);
     setSearchString(e.target.value)
     //this line for develop
     if (e.target.value !== "") {

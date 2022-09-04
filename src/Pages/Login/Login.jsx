@@ -6,18 +6,38 @@ import './Login.css'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css'
 import toast, { Toaster } from 'react-hot-toast';
+import { endpoint } from '../../defz'
+import { selectUserNumber } from '../../redux/auth/userSelector'
+import {connect} from 'react-redux'
 
-function Login() {
+function Login({phone_number}) {
+  console.log(phone_number);
   const [phone, setPhone] = useState("")
   var handleOnChange = (value) => {
-    console.log(value);
     setPhone(value)
   };
-  const sendReq = async (e) =>{
+  const reqBody = {
+    "phone_number": `+${phone}`
+  }
+
+  const sendReq = async (e) => {
     e.preventDefault();
-    console.log(phone);
     if (phone === "") {
       toast.error("Please Enter your phone number")
+    } else {
+      console.log(reqBody);
+      await fetch(`${endpoint}/users/auth/otp`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: reqBody
+      }).then((res) => {
+        console.log(res)
+        if (res.status === 204) {
+          window.location.href = "/verify_login"
+        }
+      })
     }
   }
   return (
@@ -33,12 +53,12 @@ function Login() {
           <span className='ch-txts'>Please enter your detailes.</span>
         </div>
         <span className='ch-txts'>Sign in</span>
-        <hr />
+        <hr style={{ marginTop: "8px" }} />
         <div className="email-section">
           <div className="btns">
             <PhoneInput
               name="phoneNumber"
-              type="text"
+              type="number"
               regions={['north-america', 'south-america', 'central-america', 'carribean', 'eu-union', 'ex-ussr', 'ex-yugos', 'baltic', 'middle-east', 'north-africa']}
               enableAreaCodes={true}
               enableSearch={true}
@@ -65,16 +85,16 @@ function Login() {
                 fontFamily: "Inter-Medium"
               }}
               dropdownStyle={{
-                width : "90vw"
+                width: "90vw"
               }}
               searchStyle={{
-                width : "90%",
-                borderRadius : "8px",
-                padding : "8px"
+                width: "90%",
+                borderRadius: "8px",
+                padding: "8px"
               }}
               buttonStyle={{
-                border : "none",
-                outline : "none"
+                border: "none",
+                outline: "none"
               }}
               required
             />
@@ -83,7 +103,7 @@ function Login() {
         </div>
         <div className="or">
           <hr style={{ width: "100%" }} />
-          <span style={{ padding: "0 4px" }} className='ch-txts'>OR</span>
+          <span style={{ margin: "0 4px 32px 4px" }} className='ch-txts'>OR</span>
           <hr style={{ width: "100%" }} />
         </div>
         <div className="gooface-section">
@@ -106,10 +126,14 @@ function Login() {
             </button>
           </div>
         </div>
-        
+
       </div>
     </div>
   )
 }
 
-export default Login
+const mapStateToProps = (state) => ({
+  phone_number: selectUserNumber(state),
+});
+
+export default connect(mapStateToProps)(Login)
