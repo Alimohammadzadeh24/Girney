@@ -5,7 +5,7 @@ const userState = {
   //uuid: null,
   //email: null,
   phone_number: "989025235394",
-  origin: 'Istanbul',
+  origin: '',
   destination: '',
 };
 

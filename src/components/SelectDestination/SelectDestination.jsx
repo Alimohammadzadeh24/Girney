@@ -48,9 +48,7 @@ function SelectDestination({ Closer }) {
 
   }
 
-  const selectDestination = () => {
-
-  }
+  $('#confirm-origin').on('click', closeSelect)
 
   return (
     <div className='SelectOrigin-Container'>
@@ -59,8 +57,8 @@ function SelectDestination({ Closer }) {
       <div className="box-selectOrigin">
         <div className="selectOriginDivs">
           <div className='header-sOrigin'>
-            <div onClick={closeSelect} style={{width : "32px" , height : "32px"}}>
-              <IoIosArrowBack color='#FFFFFF' fontSize={'24px'}  />
+            <div onClick={closeSelect} style={{ width: "32px", height: "32px" }}>
+              <IoIosArrowBack color='#FFFFFF' fontSize={'24px'} />
             </div>
             <span style={{ position: "absolute", left: "0", right: "0" }} className='title-txts'>Destination</span>
             <span></span>
@@ -74,7 +72,14 @@ function SelectDestination({ Closer }) {
               {
                 searchedArray.map((item, index) => {
                   return (
-                    <div className='OriginsItem' onClick={selectDestination} key={index}>
+                    <div className='OriginsItem' onClick={() => {
+                      $('.origin-list-box').css({ "display": "none" });
+                      $('.origin-input').val(`${item.city}`);
+                      $(".input-bottom-txt").css({ "display": "block" })
+                      $(".origin-list-box").css({ "display": "none" })
+                      $(".box-selectOrigin").css({ "height": "40vh" })
+                      $('.Continue-btn').removeAttr('disabled', false)
+                    }} key={index}>
                       <Icon style={{ color: "#B770FE", marginRight: "10px", fontSize: "24px" }} icon="cil:location-pin" />
                       <span className='origins-country'>{item.country},</span>
                       <span className='origins-capital'>{item.city}</span>
@@ -84,7 +89,7 @@ function SelectDestination({ Closer }) {
               }
             </div>
           </div>
-          <button style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn' disabled>Confirm</button>
+          <button id='confirm-origin' style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn' disabled>Confirm</button>
         </div>
       </div>
     </div>

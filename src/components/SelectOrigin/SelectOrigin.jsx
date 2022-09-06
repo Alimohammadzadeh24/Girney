@@ -3,14 +3,17 @@ import { Icon } from '@iconify/react';
 import './SelectOrigin.css'
 import CountryData from '../../CountruData.json'
 import $ from 'jquery'
-function SelectOrigin({ Closer }) {
+import { setUserDestination } from '../../redux/auth/userActions';
+import { connect, useDispatch } from 'react-redux';
+function SelectOrigin({ Closer , state }) {
+  const dispatch = useDispatch();
   const closeSelect = () => {
     Closer(false)
   }
-  const [countries, setCountries] = useState(CountryData)
   const [inputValueCheck, setInputValueCheck] = useState(false)
   const [searchedArray, setSearchedArray] = useState(CountryData);
   const [searchString, setSearchString] = useState("");
+  const [originCity , setOriginCity] = useState('London')
 
   useEffect(() => {
     if (searchString.length === 0) {
@@ -45,10 +48,10 @@ function SelectOrigin({ Closer }) {
     }
 
   }
-
-  const selectOrigin = () =>{
-    
-  }
+  $('#confirm-origin').on('click', ()=>{
+    Closer(false);
+    dispatch(setUserDestination('Tehran'));
+  })
 
   return (
     <div className='SelectOrigin-Container'>
@@ -70,7 +73,15 @@ function SelectOrigin({ Closer }) {
               {
                 searchedArray.map((item, index) => {
                   return (
-                    <div className='OriginsItem' onClick={selectOrigin} key={index}>
+                    <div className='OriginsItem' onClick={() => {
+                      $('.origin-list-box').css({ "display": "none" });
+                      $('.origin-input').val(`${item.city}`);
+                      $(".input-bottom-txt").css({ "display": "block" })
+                      $(".origin-list-box").css({ "display": "none" })
+                      $(".box-selectOrigin").css({ "height": "40vh" })
+                      $('.Continue-btn').removeAttr('disabled', false)
+                      setOriginCity(item.city)
+                    }} key={index}>
                       <Icon style={{ color: "#B770FE", marginRight: "10px", fontSize: "24px" }} icon="cil:location-pin" />
                       <span className='origins-country'>{item.country},</span>
                       <span className='origins-capital'>{item.city}</span>
@@ -80,11 +91,21 @@ function SelectOrigin({ Closer }) {
               }
             </div>
           </div>
-          <button style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn' disabled>Confirm</button>
+          <button id='confirm-origin' style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn' disabled>Confirm</button>
         </div>
       </div>
     </div>
   )
 }
+const mapStateToProps = (state) => {
+  return{
+    state: state
+  }
+}
+// const mapDispatchToProps = (dispath) => {
+//   return{
+//     setUserDestination: (originCity) => dispath(setUserDestination(originCity))
+//   }
+// }
 
-export default SelectOrigin
+export default connect(mapStateToProps)(SelectOrigin)

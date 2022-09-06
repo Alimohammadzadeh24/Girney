@@ -6,36 +6,32 @@ import SelectOrigin from '../../components/SelectOrigin/SelectOrigin'
 import SelectDestination from '../../components/SelectDestination/SelectDestination'
 import $ from 'jquery'
 import { connect } from 'react-redux'
-
 function Visa({ state }) {
     const [showOriginSelector, setShowOriginSelector] = useState(false)
     const [showDestinationSelector, setShowDestinationSelector] = useState(false)
-
     console.log(state);
     if (state.origin !== '') {
         $('.img1').addClass('img1-done').removeClass('img1')
         $('.img2').css({ "margin-left": "0px" })
         $('.img3').css({ "margin-left": "0px" })
-    } else {
-        $('#btn2').attr('disabled', true)
+        $('#btn2').attr('disabled', false)
+        $('#btn2').on('click', () => {
+            setShowDestinationSelector(true)
+        })
     }
     if (state.destination !== '') {
         $('.img2').addClass('img2-done').removeClass('img2')
-    } else {
-        $('#btn3').attr('disabled', true)
+        $('#btn3').attr('disabled', false)
+        $('#btn3').on('click', (e) => {
+            e.preventDefault();
+            $('.img3').addClass('img3-done').removeClass('img3')
+            setTimeout(() => {
+                window.location.href = '/final_step';
+            }, 1000)
+        })
     }
     const showSelectOrigin = () => {
         setShowOriginSelector(true)
-    }
-    const showSelectDestination = () => {
-        setShowDestinationSelector(true)
-    }
-    const continueToFinal = (e) => {
-        e.preventDefault();
-        $('.img3').addClass('img3-done').removeClass('img3')
-        setTimeout(() => {
-            window.location.href = '/final_step';
-        }, 1000)
     }
     return (
         <div className='visa-container'>
@@ -73,8 +69,8 @@ function Visa({ state }) {
                 </div>
                 <div className="visa-buttons">
                     <button id='btn1' onClick={showSelectOrigin} className='visa-btn'>{state.origin !== '' ? `${state.origin}` : "Enter Your Origin"}</button>
-                    <button id='btn2' onClick={showSelectDestination} className='visa-btn'>{state.destination !== '' ? `${state.destination}` : "Enter Your Destination"}</button>
-                    <button id='btn3' onClick={continueToFinal} className='visa-btn'>Continue</button>
+                    <button id='btn2' className='visa-btn' disabled>{state.destination !== '' ? `${state.destination}` : "Enter Your Destination"}</button>
+                    <button id='btn3' className='visa-btn' disabled>Continue</button>
                 </div>
             </div>
             {showOriginSelector === true ? <SelectOrigin Closer={setShowOriginSelector} /> : null}

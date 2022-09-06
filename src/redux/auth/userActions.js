@@ -7,7 +7,7 @@ export const setUserOrigin = (origin) => ({
   type: userActionTypes.SET_ORIGIN,
   payload: origin,
 });
-export const setUserDestination = (destination) => ({
+export const setUserDestination = destination => ({
   type: userActionTypes.SET_DESTINATION,
   payload: destination,
 });
