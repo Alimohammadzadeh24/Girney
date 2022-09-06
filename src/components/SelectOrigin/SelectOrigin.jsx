@@ -52,7 +52,7 @@ function SelectOrigin({ Closer }) {
 
   return (
     <div className='SelectOrigin-Container'>
-      <section style={{ color: "#ffffff" }} className='empty-div'>
+      <section onClick={closeSelect} style={{ color: "#ffffff" }} className='empty-div'>
       </section>
       <div className="box-selectOrigin">
         <div className="selectOriginDivs">
@@ -80,7 +80,7 @@ function SelectOrigin({ Closer }) {
               }
             </div>
           </div>
-          <button style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn'>Confirm</button>
+          <button style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn' disabled>Confirm</button>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@
 
 .box-selectOrigin {
   width: 100vw;
-  min-height: 40vh;
+  max-height: max-content;
   background-color: #080c25;
   position: relative;
   padding-top: 16px;
@@ -75,11 +75,10 @@
 
 .origin-list-box {
   width: 90vw;
-  height: 24vh;
+  height: max-content;
+  max-height: 24vh;
   background-color: #ffffff;
   display: none;
-  position: absolute;
-  bottom: 64px;
   overflow-y: scroll;
   border-radius: 8px;
   margin-bottom: 16px;

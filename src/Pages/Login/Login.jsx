@@ -8,9 +8,10 @@ import 'react-phone-input-2/lib/bootstrap.css'
 import toast, { Toaster } from 'react-hot-toast';
 import { endpoint } from '../../defz'
 import { selectUserNumber } from '../../redux/auth/userSelector'
-import Connect  from 'react-redux'
+import { connect } from 'react-redux'
 
-function Login({phone_number}) {
+function Login({state}) {
+
   const [phone, setPhone] = useState("")
   var handleOnChange = (value) => {
     setPhone(value)
@@ -129,9 +130,11 @@ function Login({phone_number}) {
   )
 }
 
-// const mapStateToProps = (state) => ({
-//   phone_number: selectUserNumber(state),
-// });
+const mapStateToProps = (state) => {
+  return {
+    state: state
+  }
+}
 
-// export default Connect(mapStateToProps)(Login)
-export default Login;
+export default connect(mapStateToProps)(Login)
+// export default Login;

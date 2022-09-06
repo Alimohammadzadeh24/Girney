@@ -3,8 +3,9 @@ import { Icon } from '@iconify/react';
 import CountryData from '../../CountruData.json'
 import './SelectDestination.css'
 import $ from 'jquery'
+import { IoIosArrowBack } from 'react-icons/io'
 
-function SelectDestination({Closer}) {
+function SelectDestination({ Closer }) {
   const closeSelect = () => {
     Closer(false)
   }
@@ -53,12 +54,14 @@ function SelectDestination({Closer}) {
 
   return (
     <div className='SelectOrigin-Container'>
-      <section style={{ color: "#ffffff" }} className='empty-div'>
+      <section onClick={closeSelect} style={{ color: "#ffffff" }} className='empty-div'>
       </section>
       <div className="box-selectOrigin">
         <div className="selectOriginDivs">
           <div className='header-sOrigin'>
-            <Icon onClick={closeSelect} style={{ color: "#ffffff", fontSize: "32px" }} icon="eva:arrow-ios-back-outline" />
+            <div onClick={closeSelect} style={{width : "32px" , height : "32px"}}>
+              <IoIosArrowBack color='#FFFFFF' fontSize={'24px'}  />
+            </div>
             <span style={{ position: "absolute", left: "0", right: "0" }} className='title-txts'>Destination</span>
             <span></span>
           </div>
@@ -81,7 +84,7 @@ function SelectDestination({Closer}) {
               }
             </div>
           </div>
-          <button style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn'>Confirm</button>
+          <button style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn' disabled>Confirm</button>
         </div>
       </div>
     </div>

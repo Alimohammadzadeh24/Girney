@@ -1,15 +1,15 @@
 import userActionTypes from "./userTypes";
 
-const INITIAL_STATE = {
+const userState = {
   // token: null,
   //uuid: null,
   //email: null,
   phone_number: "989025235394",
-  origin: "",
-  destination: "",
+  origin: 'Istanbul',
+  destination: '',
 };
 
-const userReducer = (state = INITIAL_STATE, action) => {
+const userReducer = (state = userState, action) => {
   switch (action.payload) {
     case userActionTypes.SET_NUMBER:
       return {

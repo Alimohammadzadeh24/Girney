@@ -1,29 +1,48 @@
-import React , {useState} from 'react'
+import React, { useState } from 'react'
 import MenuVisa from '../../assets/img/menuVisa.png'
 import Avatar from '../../assets/img/Avatar.png'
 import './Visa.css'
 import SelectOrigin from '../../components/SelectOrigin/SelectOrigin'
 import SelectDestination from '../../components/SelectDestination/SelectDestination'
 import $ from 'jquery'
+import { connect } from 'react-redux'
 
-function Visa() {
-    const [showOriginSelector , setShowOriginSelector] = useState(false)
+function Visa({ state }) {
+    const [showOriginSelector, setShowOriginSelector] = useState(false)
     const [showDestinationSelector, setShowDestinationSelector] = useState(false)
 
+    console.log(state);
+    if (state.origin !== '') {
+        $('.img1').addClass('img1-done').removeClass('img1')
+        $('.img2').css({ "margin-left": "0px" })
+        $('.img3').css({ "margin-left": "0px" })
+    } else {
+        $('#btn2').attr('disabled', true)
+    }
+    if (state.destination !== '') {
+        $('.img2').addClass('img2-done').removeClass('img2')
+    } else {
+        $('#btn3').attr('disabled', true)
+    }
     const showSelectOrigin = () => {
         setShowOriginSelector(true)
     }
-    const showSelectDEstination = () => {
+    const showSelectDestination = () => {
         setShowDestinationSelector(true)
+    }
+    const continueToFinal = (e) => {
+        e.preventDefault();
+        $('.img3').addClass('img3-done').removeClass('img3')
+        setTimeout(() => {
+            window.location.href = '/final_step';
+        }, 1000)
     }
     return (
         <div className='visa-container'>
-            { showOriginSelector === true ? <SelectOrigin Closer={setShowOriginSelector}/> : null}
-            { showDestinationSelector === true ? <SelectDestination Closer={setShowDestinationSelector}/> : null}
             <div className="divs-box">
                 <div className='header'>
                     <img src={MenuVisa} alt="" />
-                    <img src={Avatar}  alt=""/>
+                    <img src={Avatar} alt="" />
                 </div>
                 <div className="start-section">
                     <span className='title-txts'>Start your Girney</span>
@@ -53,13 +72,21 @@ function Visa() {
                     </div>
                 </div>
                 <div className="visa-buttons">
-                    <button id='btn1' onClick={showSelectOrigin} className='visa-btn'>Enter Your Origin</button>
-                    <button id='btn2' onClick={showSelectDEstination} className='visa-btn' disabled>Enter your Destination</button>
-                    <button id='btn3' className='visa-btn' disabled>Continue</button>
+                    <button id='btn1' onClick={showSelectOrigin} className='visa-btn'>{state.origin !== '' ? `${state.origin}` : "Enter Your Origin"}</button>
+                    <button id='btn2' onClick={showSelectDestination} className='visa-btn'>{state.destination !== '' ? `${state.destination}` : "Enter Your Destination"}</button>
+                    <button id='btn3' onClick={continueToFinal} className='visa-btn'>Continue</button>
                 </div>
             </div>
+            {showOriginSelector === true ? <SelectOrigin Closer={setShowOriginSelector} /> : null}
+            {showDestinationSelector === true ? <SelectDestination Closer={setShowDestinationSelector} /> : null}
         </div>
     )
+
+}
+const mapStateToProps = (state) => {
+    return {
+        state: state
+    }
 }
 
-export default Visa
+export default connect(mapStateToProps)(Visa)

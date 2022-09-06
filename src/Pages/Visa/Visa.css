@@ -77,6 +77,13 @@
     background-repeat: no-repeat;
     margin-right: 8px;
 }
+.img1-done{
+    background-image: url("../../assets/img/Wizard/finishWizard.png");
+    width: 32px;
+    height: 66px;
+    background-repeat: no-repeat;
+    margin-right: 8px;
+}
 
 .img2{
     background-image: url("../../assets/img/Wizard/noSelectWizard.png");
@@ -89,6 +96,16 @@
     margin-left: 4px;
     margin-right: 8px;
 }
+.img2-done{
+    background-image: url("../../assets/img/Wizard/finishWizard.png");
+    width: 32px;
+    height: 66px;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+}
 
 .img3{
     background-image: url("../../assets/img/Wizard/finishWizardnoDone.png");
@@ -96,6 +113,13 @@
     height: 66px;
     background-repeat: no-repeat;
     margin-left: 4px;
+    margin-right: 8px;
+}
+.img3-done{
+    background-image: url("../../assets/img/Wizard/finishDoneWizard.png");
+    width: 32px;
+    height: 66px;
+    background-repeat: no-repeat;
     margin-right: 8px;
 }
 .wizard-title{
