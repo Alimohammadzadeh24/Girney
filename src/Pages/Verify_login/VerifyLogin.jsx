@@ -1,14 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './VerifyLogin.css'
 import MessageIcon from '../../assets/img/MessageIcon.png'
 import toast, { Toaster } from 'react-hot-toast';
 // import $ from 'jquery'
 import VerificationInput from "react-verification-input";
 import { Icon } from '@iconify/react';
+import { endpoint } from '../../defz';
 function VerifyLogin() {
-  const LoginButton = (e) => {
+  const [code, setCode] = useState("111234")
+  const codeVerifyOnChange = e => {
+    // setCode(e.target.value)
+    // console.log(e.target.value);
+    // console.log(code);
+  }
+  const LoginButton = async (e) => {
     e.preventDefault();
-    toast.error("Please Enter The Right Code")
+    // toast.error("Please Enter The Right Code")
+    const verifyCodeReqBody = {
+      "phone_number" : "+989025235394",
+      "otp" : code
+    }
+    await fetch(`${endpoint}/users/auth/otp/verify`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: verifyCodeReqBody
+    }).then(response => {
+      if (response.status === 204) {
+        window.location.href = "/visa"
+      }
+    })
   }
   const backToLogin = () => {
     window.location.href = "/login"
@@ -30,6 +52,8 @@ function VerifyLogin() {
         <div className="verify-section">
           <div style={{ marginBottom: "26px" }}>
             <VerificationInput
+              // value={code}
+              onChange={codeVerifyOnChange}
               placeholder=' '
               length={6}
               classNames={{

@@ -3,17 +3,23 @@ import MenuVisa from '../../assets/img/menuVisa.png'
 import Avatar from '../../assets/img/Avatar.png'
 import './Visa.css'
 import SelectOrigin from '../../components/SelectOrigin/SelectOrigin'
+import SelectDestination from '../../components/SelectDestination/SelectDestination'
 import $ from 'jquery'
 
 function Visa() {
     const [showOriginSelector , setShowOriginSelector] = useState(false)
+    const [showDestinationSelector, setShowDestinationSelector] = useState(false)
 
     const showSelectOrigin = () => {
         setShowOriginSelector(true)
     }
+    const showSelectDEstination = () => {
+        setShowDestinationSelector(true)
+    }
     return (
         <div className='visa-container'>
             { showOriginSelector === true ? <SelectOrigin Closer={setShowOriginSelector}/> : null}
+            { showDestinationSelector === true ? <SelectDestination Closer={setShowDestinationSelector}/> : null}
             <div className="divs-box">
                 <div className='header'>
                     <img src={MenuVisa} alt="" />
@@ -48,7 +54,7 @@ function Visa() {
                 </div>
                 <div className="visa-buttons">
                     <button id='btn1' onClick={showSelectOrigin} className='visa-btn'>Enter Your Origin</button>
-                    <button id='btn2' className='visa-btn' disabled>Enter your Destination</button>
+                    <button id='btn2' onClick={showSelectDEstination} className='visa-btn' disabled>Enter your Destination</button>
                     <button id='btn3' className='visa-btn' disabled>Continue</button>
                 </div>
             </div>

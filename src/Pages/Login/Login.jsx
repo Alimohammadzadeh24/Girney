@@ -8,10 +8,9 @@ import 'react-phone-input-2/lib/bootstrap.css'
 import toast, { Toaster } from 'react-hot-toast';
 import { endpoint } from '../../defz'
 import { selectUserNumber } from '../../redux/auth/userSelector'
-import {connect} from 'react-redux'
+import Connect  from 'react-redux'
 
 function Login({phone_number}) {
-  console.log(phone_number);
   const [phone, setPhone] = useState("")
   var handleOnChange = (value) => {
     setPhone(value)
@@ -25,7 +24,6 @@ function Login({phone_number}) {
     if (phone === "") {
       toast.error("Please Enter your phone number")
     } else {
-      console.log(reqBody);
       await fetch(`${endpoint}/users/auth/otp`, {
         method: "POST",
         headers: {
@@ -33,7 +31,6 @@ function Login({phone_number}) {
         },
         body: reqBody
       }).then((res) => {
-        console.log(res)
         if (res.status === 204) {
           window.location.href = "/verify_login"
         }
@@ -132,8 +129,9 @@ function Login({phone_number}) {
   )
 }
 
-const mapStateToProps = (state) => ({
-  phone_number: selectUserNumber(state),
-});
+// const mapStateToProps = (state) => ({
+//   phone_number: selectUserNumber(state),
+// });
 
-export default connect(mapStateToProps)(Login)
+// export default Connect(mapStateToProps)(Login)
+export default Login;
