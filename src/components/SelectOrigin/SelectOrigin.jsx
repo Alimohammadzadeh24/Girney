@@ -3,10 +3,10 @@ import { Icon } from '@iconify/react';
 import './SelectOrigin.css'
 import CountryData from '../../CountruData.json'
 import $ from 'jquery'
-import { setUserDestination } from '../../redux/auth/userActions';
+import { setUserOrigin } from '../../redux/auth/userActions';
+import userActionTypes from '../../redux/auth/userTypes';
 import { connect, useDispatch } from 'react-redux';
-function SelectOrigin({ Closer , state }) {
-  const dispatch = useDispatch();
+function SelectOrigin({ Closer , state , setUserOrigin }) {
   const closeSelect = () => {
     Closer(false)
   }
@@ -50,7 +50,10 @@ function SelectOrigin({ Closer , state }) {
   }
   $('#confirm-origin').on('click', ()=>{
     Closer(false);
-    dispatch(setUserDestination('Tehran'));
+    setUserOrigin(originCity)
+    setTimeout(()=>{
+      console.log(state);
+    } , 2000)
   })
 
   return (
@@ -102,10 +105,10 @@ const mapStateToProps = (state) => {
     state: state
   }
 }
-// const mapDispatchToProps = (dispath) => {
-//   return{
-//     setUserDestination: (originCity) => dispath(setUserDestination(originCity))
-//   }
-// }
+const mapDispatchToProps = (dispath) => {
+  return{
+    setUserOrigin: (originCity) => dispath(setUserOrigin(originCity))
+  }
+}
 
-export default connect(mapStateToProps)(SelectOrigin)
+export default connect(mapStateToProps , mapDispatchToProps)(SelectOrigin)
