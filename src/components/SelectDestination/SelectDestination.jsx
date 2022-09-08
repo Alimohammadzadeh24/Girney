@@ -4,15 +4,16 @@ import CountryData from '../../CountruData.json'
 import './SelectDestination.css'
 import $ from 'jquery'
 import { IoIosArrowBack } from 'react-icons/io'
+import { setUserDestination } from '../../redux/auth/userActions';
+import { connect } from 'react-redux';
 
-function SelectDestination({ Closer }) {
+function SelectDestination(props) {
   const closeSelect = () => {
-    Closer(false)
+    props.Closer(false)
   }
-  const [countries, setCountries] = useState(CountryData)
-  const [inputValueCheck, setInputValueCheck] = useState(false)
   const [searchedArray, setSearchedArray] = useState(CountryData);
   const [searchString, setSearchString] = useState("");
+  const [destinationCity, setDestinationCity] = useState("")
 
   useEffect(() => {
     if (searchString.length === 0) {
@@ -36,7 +37,7 @@ function SelectDestination({ Closer }) {
     setSearchString(e.target.value)
     //this line for develop
     if (e.target.value !== "") {
-      setInputValueCheck(true)
+      // setInputValueCheck(true)
       $(".input-bottom-txt").css({ "display": "none" })
       $(".origin-list-box").css({ "display": "block" })
       $(".box-selectOrigin").css({ "height": "100vh" })
@@ -45,10 +46,12 @@ function SelectDestination({ Closer }) {
       $(".origin-list-box").css({ "display": "none" })
       $(".box-selectOrigin").css({ "height": "40vh" })
     }
-
   }
 
-  $('#confirm-origin').on('click', closeSelect)
+  $('#confirm-origin').on('click', () => {
+    props.setUserDestination(destinationCity.toString())
+    props.Closer(false);
+  })
 
   return (
     <div className='SelectOrigin-Container'>
@@ -79,6 +82,7 @@ function SelectDestination({ Closer }) {
                       $(".origin-list-box").css({ "display": "none" })
                       $(".box-selectOrigin").css({ "height": "40vh" })
                       $('.Continue-btn').removeAttr('disabled', false)
+                      setDestinationCity(`${item.city}`)
                     }} key={index}>
                       <Icon style={{ color: "#B770FE", marginRight: "10px", fontSize: "24px" }} icon="cil:location-pin" />
                       <span className='origins-country'>{item.country},</span>
@@ -96,4 +100,16 @@ function SelectDestination({ Closer }) {
   )
 }
 
-export default SelectDestination
+const mapStateToProps = (state) => {
+  return {
+    state: state
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUserDestination: (destinationCity) => dispatch(setUserDestination(destinationCity))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectDestination)

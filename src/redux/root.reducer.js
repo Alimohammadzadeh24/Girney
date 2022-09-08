@@ -1,13 +1,14 @@
-// import { combineReducers } from "redux";
+// // import { combineReducers } from "redux";
+// import { persistReducer } from "redux-persist";
+// import storage from "redux-persist/lib/storage";
 
 // import userReducer from "./auth/userReucer";
+// // const appReducer = combineReducers({
+// //   user: userReducer,
+// // });
 
-// const appReducer = combineReducers({
-//   user: userReducer,
-// });
+// // const rootReducer = (state,action) => {
+// //     return appReducer(state,action);
+// // }
 
-// const rootReducer = (state,ation) => {
-//     return appReducer;
-// }
-
-// export default rootReducer
+// export default persistReducer(persistConfig, userReducer);

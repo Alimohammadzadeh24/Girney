@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react';
-import './SelectOrigin.css'
 import CountryData from '../../CountruData.json'
+import './SelectOrigin.css'
 import $ from 'jquery'
+import { IoIosArrowBack } from 'react-icons/io'
 import { setUserOrigin } from '../../redux/auth/userActions';
-import userActionTypes from '../../redux/auth/userTypes';
-import { connect, useDispatch } from 'react-redux';
-function SelectOrigin({ Closer , state , setUserOrigin }) {
+import { connect } from 'react-redux';
+
+function SelectDestination(props) {
   const closeSelect = () => {
-    Closer(false)
+    props.Closer(false)
   }
-  const [inputValueCheck, setInputValueCheck] = useState(false)
   const [searchedArray, setSearchedArray] = useState(CountryData);
   const [searchString, setSearchString] = useState("");
-  const [originCity , setOriginCity] = useState('London')
+  const [destinationCity, setDestinationCity] = useState("")
 
   useEffect(() => {
     if (searchString.length === 0) {
@@ -37,7 +37,7 @@ function SelectOrigin({ Closer , state , setUserOrigin }) {
     setSearchString(e.target.value)
     //this line for develop
     if (e.target.value !== "") {
-      setInputValueCheck(true)
+      // setInputValueCheck(true)
       $(".input-bottom-txt").css({ "display": "none" })
       $(".origin-list-box").css({ "display": "block" })
       $(".box-selectOrigin").css({ "height": "100vh" })
@@ -46,14 +46,11 @@ function SelectOrigin({ Closer , state , setUserOrigin }) {
       $(".origin-list-box").css({ "display": "none" })
       $(".box-selectOrigin").css({ "height": "40vh" })
     }
-
   }
-  $('#confirm-origin').on('click', ()=>{
-    Closer(false);
-    setUserOrigin(originCity)
-    setTimeout(()=>{
-      console.log(state);
-    } , 2000)
+
+  $('#confirm-origin').on('click', () => {
+    props.setUserOrigin(destinationCity.toString())
+    props.Closer(false);
   })
 
   return (
@@ -63,7 +60,9 @@ function SelectOrigin({ Closer , state , setUserOrigin }) {
       <div className="box-selectOrigin">
         <div className="selectOriginDivs">
           <div className='header-sOrigin'>
-            <Icon onClick={closeSelect} style={{ color: "#ffffff", fontSize: "32px" }} icon="eva:arrow-ios-back-outline" />
+            <div onClick={closeSelect} style={{ width: "32px", height: "32px" }}>
+              <IoIosArrowBack color='#FFFFFF' fontSize={'24px'} />
+            </div>
             <span style={{ position: "absolute", left: "0", right: "0" }} className='title-txts'>Origin</span>
             <span></span>
           </div>
@@ -83,7 +82,7 @@ function SelectOrigin({ Closer , state , setUserOrigin }) {
                       $(".origin-list-box").css({ "display": "none" })
                       $(".box-selectOrigin").css({ "height": "40vh" })
                       $('.Continue-btn').removeAttr('disabled', false)
-                      setOriginCity(item.city)
+                      setDestinationCity(`${item.city}`)
                     }} key={index}>
                       <Icon style={{ color: "#B770FE", marginRight: "10px", fontSize: "24px" }} icon="cil:location-pin" />
                       <span className='origins-country'>{item.country},</span>
@@ -100,15 +99,17 @@ function SelectOrigin({ Closer , state , setUserOrigin }) {
     </div>
   )
 }
+
 const mapStateToProps = (state) => {
-  return{
+  return {
     state: state
   }
 }
-const mapDispatchToProps = (dispath) => {
-  return{
-    setUserOrigin: (originCity) => dispath(setUserOrigin(originCity))
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUserOrigin: (originCity) => dispatch(setUserOrigin(originCity))
   }
 }
 
-export default connect(mapStateToProps , mapDispatchToProps)(SelectOrigin)
+export default connect(mapStateToProps, mapDispatchToProps)(SelectDestination)

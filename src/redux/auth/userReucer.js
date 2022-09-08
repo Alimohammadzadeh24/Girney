@@ -1,16 +1,17 @@
+import { setUserOrigin } from "./userActions";
 import userActionTypes from "./userTypes";
 
 const userState = {
   // token: null,
   //uuid: null,
   //email: null,
-  phone_number: "989025235394",
-  origin: '',
-  destination: '',
+  phone_number: "",
+  origin: "",
+  destination: "",
 };
 
 const userReducer = (state = userState, action) => {
-  switch (action.payload) {
+  switch (action.type) {
     case userActionTypes.SET_NUMBER:
       return {
         ...state,

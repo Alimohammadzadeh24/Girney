@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 import './VerifyLogin.css'
 import MessageIcon from '../../assets/img/MessageIcon.png'
 import toast, { Toaster } from 'react-hot-toast';
@@ -6,8 +6,11 @@ import toast, { Toaster } from 'react-hot-toast';
 import VerificationInput from "react-verification-input";
 import { Icon } from '@iconify/react';
 import { endpoint } from '../../defz';
-function VerifyLogin() {
-  const [code, setCode] = useState("111234")
+import { connect } from 'react-redux';
+function VerifyLogin(props) {
+  console.log(props.state);
+  // const [code, setCode] = useState("111234")
+  const code = "111234"
   const codeVerifyOnChange = e => {
     // setCode(e.target.value)
     // console.log(e.target.value);
@@ -15,7 +18,7 @@ function VerifyLogin() {
   }
   const LoginButton = async (e) => {
     e.preventDefault();
-    // toast.error("Please Enter The Right Code")
+    toast.error("Please Enter The Right Code")
     const verifyCodeReqBody = {
       "phone_number" : "+989025235394",
       "otp" : code
@@ -47,7 +50,7 @@ function VerifyLogin() {
             <img src={MessageIcon} alt="" />
           </div>
           <span className='title-txts'>Check your phone</span>
-          <span className='ch-txts'>we sent a code to 098123456788</span>
+          <span className='ch-txts'>we sent a code to +{props.state.phone_number}</span>
         </div>
         <div className="verify-section">
           <div style={{ marginBottom: "26px" }}>
@@ -64,7 +67,6 @@ function VerifyLogin() {
               }}
             />
           </div>
-          <button onClick={LoginButton} className='Continue-btn'>Login</button>
         </div>
         <div className="bottom-section">
           <div style={{ marginBottom: "32px" }}>
@@ -87,8 +89,13 @@ function VerifyLogin() {
           </span>
         </div>
       </div>
+      <button onClick={LoginButton} className='Continue-btn'>Login</button>
     </div>
   )
 }
-
-export default VerifyLogin
+const mapStateToProps = (state) => {
+  return {
+    state : state
+  }
+}
+export default connect(mapStateToProps)(VerifyLogin)
