@@ -4,16 +4,17 @@ import CountryData from '../../CountruData.json'
 import './SelectOrigin.css'
 import $ from 'jquery'
 import { IoIosArrowBack } from 'react-icons/io'
+import { useDispatch } from 'react-redux';
 import { setUserOrigin } from '../../redux/auth/userActions';
-import { connect } from 'react-redux';
 
 function SelectDestination(props) {
+  const dispatch = useDispatch();
   const closeSelect = () => {
     props.Closer(false)
   }
   const [searchedArray, setSearchedArray] = useState(CountryData);
   const [searchString, setSearchString] = useState("");
-  const [destinationCity, setDestinationCity] = useState("")
+  const [originCity, setOriginCity] = useState("")
 
   useEffect(() => {
     if (searchString.length === 0) {
@@ -49,7 +50,7 @@ function SelectDestination(props) {
   }
 
   $('#confirm-origin').on('click', () => {
-    props.setUserOrigin(destinationCity.toString())
+    dispatch(setUserOrigin(originCity.toString()));
     props.Closer(false);
   })
 
@@ -82,7 +83,7 @@ function SelectDestination(props) {
                       $(".origin-list-box").css({ "display": "none" })
                       $(".box-selectOrigin").css({ "height": "40vh" })
                       $('.Continue-btn').removeAttr('disabled', false)
-                      setDestinationCity(`${item.city}`)
+                      setOriginCity(`${item.city}`)
                     }} key={index}>
                       <Icon style={{ color: "#B770FE", marginRight: "10px", fontSize: "24px" }} icon="cil:location-pin" />
                       <span className='origins-country'>{item.country},</span>
@@ -100,16 +101,5 @@ function SelectDestination(props) {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    state: state
-  }
-}
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setUserOrigin: (originCity) => dispatch(setUserOrigin(originCity))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SelectDestination)
+export default SelectDestination

@@ -1,6 +1,6 @@
-import { setUserOrigin } from "./userActions";
 import userActionTypes from "./userTypes";
 
+// initialState for user information
 const userState = {
   // token: null,
   //uuid: null,
@@ -9,7 +9,9 @@ const userState = {
   origin: "",
   destination: "",
 };
+// initialState for user information
 
+//Reducer for user information
 const userReducer = (state = userState, action) => {
   switch (action.type) {
     case userActionTypes.SET_NUMBER:
@@ -31,5 +33,9 @@ const userReducer = (state = userState, action) => {
       return state;
   }
 };
+//Reducer for user information
 
+//exports
 export default userReducer;
+export const selectUserState = (state) => state
+//exports

@@ -5,9 +5,10 @@ import './SelectDestination.css'
 import $ from 'jquery'
 import { IoIosArrowBack } from 'react-icons/io'
 import { setUserDestination } from '../../redux/auth/userActions';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function SelectDestination(props) {
+  const dispatch = useDispatch();
   const closeSelect = () => {
     props.Closer(false)
   }
@@ -49,7 +50,7 @@ function SelectDestination(props) {
   }
 
   $('#confirm-origin').on('click', () => {
-    props.setUserDestination(destinationCity.toString())
+    dispatch(setUserDestination(destinationCity.toString()))
     props.Closer(false);
   })
 
@@ -99,17 +100,4 @@ function SelectDestination(props) {
     </div>
   )
 }
-
-const mapStateToProps = (state) => {
-  return {
-    state: state
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setUserDestination: (destinationCity) => dispatch(setUserDestination(destinationCity))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SelectDestination)
+export default SelectDestination

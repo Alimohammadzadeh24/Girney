@@ -6,6 +6,7 @@ import SelectOrigin from '../../components/SelectOrigin/SelectOrigin'
 import SelectDestination from '../../components/SelectDestination/SelectDestination'
 import $ from 'jquery'
 import { connect } from 'react-redux'
+import { route_final } from '../../defz'
 function Visa({ state }) {
     const [showOriginSelector, setShowOriginSelector] = useState(false)
     const [showDestinationSelector, setShowDestinationSelector] = useState(false)
@@ -26,7 +27,7 @@ function Visa({ state }) {
             e.preventDefault();
             $('.img3').addClass('img3-done').removeClass('img3')
             setTimeout(() => {
-                window.location.href = '/final_step';
+                window.location.href = route_final;
             }, 1000)
         })
     }

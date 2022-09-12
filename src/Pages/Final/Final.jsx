@@ -4,10 +4,14 @@ import Avatars from '../../assets/img/FinalAvatars.png'
 import { IoIosArrowBack } from 'react-icons/io'
 import { BsShare } from 'react-icons/bs'
 import './Final.css'
+import { useSelector } from 'react-redux'
+import { selectUserState } from '../../redux/auth/userReucer'
+import { route_visa } from '../../defz'
 
 function Final() {
+    const userState = useSelector(selectUserState)
     const goPreviousPage = () => {
-        window.location.href = '/visa'
+        window.location.href = route_visa
     }
     return (
         <div className='final-container'>
@@ -21,11 +25,11 @@ function Final() {
             <span style={{ width: "90vw" }} className='ch-txts'>By pressing on the butten below, you will get the link that you need to travel from london to los angles .</span>
             <div className='fly-box'>
                 <div style={{ marginBottom: "16px" }} className='country-city'>
-                    <span className='title-txts'>London</span>
+                    <span className='title-txts'>{userState.origin}</span>
                 </div>
                 <img src={FlyAirplane} alt="" />
                 <div style={{ marginTop: "16px" }} className='country-city'>
-                    <span className='title-txts'>LosAngles</span>
+                    <span className='title-txts'>{userState.destination}</span>
                 </div>
             </div>
             <div className='shareLink-box'>

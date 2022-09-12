@@ -7,11 +7,12 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css'
 import toast, { Toaster } from 'react-hot-toast';
 import { endpoint } from '../../defz'
-import { connect } from 'react-redux'
 import { setUserNumber } from '../../redux/auth/userActions'
+import { useDispatch } from 'react-redux'
+import { route_loginVerify } from '../../defz'
 
-function Login(props) {
-  console.log(props);
+function Login() {
+  const dispatch = useDispatch();
   const [phone, setPhone] = useState("")
   var handleOnChange = (value) => {
     setPhone(value)
@@ -33,15 +34,11 @@ function Login(props) {
         body: reqBody
       }).then((res) => {
         if (res.status === 204) {
-          props.setUserNumber(phone)
-          console.log(props.state); 
-          //This Line For Develop
-          //This Line For Develop
-          
+          dispatch(setUserNumber(phone))
         }
       }).then(()=>{
         setTimeout(() => {
-          window.location.href = '/verify_login'
+          window.location.href = route_loginVerify
         }, 2000);
       })
     }
@@ -137,18 +134,4 @@ function Login(props) {
     </div>
   )
 }
-
-const mapStateToProps = (state) => {
-  return {
-    state: state
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setUserNumber: (phone)=> dispatch(setUserNumber(phone))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
-// export default Login;
+export default Login

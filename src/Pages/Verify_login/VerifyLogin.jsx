@@ -2,26 +2,26 @@
 import './VerifyLogin.css'
 import MessageIcon from '../../assets/img/MessageIcon.png'
 import toast, { Toaster } from 'react-hot-toast';
-// import $ from 'jquery'
 import VerificationInput from "react-verification-input";
 import { Icon } from '@iconify/react';
-import { endpoint } from '../../defz';
-import { connect } from 'react-redux';
-function VerifyLogin(props) {
-  console.log(props.state);
+import { endpoint, route_visa } from '../../defz';
+import { useSelector } from 'react-redux';
+import { selectUserState } from '../../redux/auth/userReucer';
+import { route_login } from '../../defz';
+
+function VerifyLogin() {
+  const userState = useSelector(selectUserState)
+  console.log(userState);
   // const [code, setCode] = useState("111234")
   const code = "111234"
-  const codeVerifyOnChange = e => {
-    // setCode(e.target.value)
-    // console.log(e.target.value);
-    // console.log(code);
-  }
+  // const codeVerifyOnChange = e => {
+  // }
   const LoginButton = async (e) => {
     e.preventDefault();
     toast.error("Please Enter The Right Code")
     const verifyCodeReqBody = {
-      "phone_number" : "+989025235394",
-      "otp" : code
+      "phone_number": "+989025235394",
+      "otp": code
     }
     await fetch(`${endpoint}/users/auth/otp/verify`, {
       method: 'POST',
@@ -31,12 +31,12 @@ function VerifyLogin(props) {
       body: verifyCodeReqBody
     }).then(response => {
       if (response.status === 204) {
-        window.location.href = "/visa"
+        window.location.href = route_visa
       }
     })
   }
   const backToLogin = () => {
-    window.location.href = "/login"
+    window.location.href = route_login
   }
   return (
     <div className='VerifyLogin-container'>
@@ -50,13 +50,13 @@ function VerifyLogin(props) {
             <img src={MessageIcon} alt="" />
           </div>
           <span className='title-txts'>Check your phone</span>
-          <span className='ch-txts'>we sent a code to +{props.state.phone_number}</span>
+          <span className='ch-txts'>we sent a code to +{userState.phone_number}</span>
         </div>
         <div className="verify-section">
           <div style={{ marginBottom: "26px" }}>
             <VerificationInput
               // value={code}
-              onChange={codeVerifyOnChange}
+              // onChange={codeVerifyOnChange}
               placeholder=' '
               length={6}
               classNames={{
@@ -93,9 +93,4 @@ function VerifyLogin(props) {
     </div>
   )
 }
-const mapStateToProps = (state) => {
-  return {
-    state : state
-  }
-}
-export default connect(mapStateToProps)(VerifyLogin)
+export default VerifyLogin
