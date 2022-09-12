@@ -1,11 +1,12 @@
+//imports
+import './SelectOrigin.css'
 import React, { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react';
 import CountryData from '../../CountruData.json'
-import './SelectOrigin.css'
-import $ from 'jquery'
 import { IoIosArrowBack } from 'react-icons/io'
 import { useDispatch } from 'react-redux';
 import { setUserOrigin } from '../../redux/auth/userActions';
+//imports
 
 function SelectDestination(props) {
   const dispatch = useDispatch();
@@ -15,6 +16,9 @@ function SelectDestination(props) {
   const [searchedArray, setSearchedArray] = useState(CountryData);
   const [searchString, setSearchString] = useState("");
   const [originCity, setOriginCity] = useState("")
+  const inputBottomText = document.getElementsByClassName("input-bottom-txt")
+  const originListBox = document.getElementsByClassName("origin-list-box")
+  const boxSelectOrigin = document.getElementsByClassName("box-selectOrigin")
 
   useEffect(() => {
     if (searchString.length === 0) {
@@ -32,27 +36,27 @@ function SelectDestination(props) {
       setSearchedArray(searchedObjects)
     }
   }, [searchString])
-
+  //change component element style with search input status----------
   const checkValueInput = (e) => {
-    //this line for develop
     setSearchString(e.target.value)
-    //this line for develop
     if (e.target.value !== "") {
-      // setInputValueCheck(true)
-      $(".input-bottom-txt").css({ "display": "none" })
-      $(".origin-list-box").css({ "display": "block" })
-      $(".box-selectOrigin").css({ "height": "100vh" })
+      inputBottomText.style.display = "none";
+      originListBox.style.display = "block";
+      boxSelectOrigin.style.height = "100vh";
     } else {
-      $(".input-bottom-txt").css({ "display": "block" })
-      $(".origin-list-box").css({ "display": "none" })
-      $(".box-selectOrigin").css({ "height": "40vh" })
+      inputBottomText.style.display = "block";
+      originListBox.style.display = "none";
+      boxSelectOrigin.style.height = "40vh";
     }
   }
+  //change component element style with search input status----------
 
-  $('#confirm-origin').on('click', () => {
+  //Close component and dispatch origin state----------
+  const confirmOrigin = () => {
     dispatch(setUserOrigin(originCity.toString()));
     props.Closer(false);
-  })
+  }
+  //Close component and dispatch origin state----------
 
   return (
     <div className='SelectOrigin-Container'>
@@ -77,12 +81,11 @@ function SelectDestination(props) {
                 searchedArray.map((item, index) => {
                   return (
                     <div className='OriginsItem' onClick={() => {
-                      $('.origin-list-box').css({ "display": "none" });
-                      $('.origin-input').val(`${item.city}`);
-                      $(".input-bottom-txt").css({ "display": "block" })
-                      $(".origin-list-box").css({ "display": "none" })
-                      $(".box-selectOrigin").css({ "height": "40vh" })
-                      $('.Continue-btn').removeAttr('disabled', false)
+                      originListBox.style.display = "none"
+                      document.getElementsByClassName("origin-input").value = `${item.city}`
+                      inputBottomText.style.display = "block"
+                      boxSelectOrigin.style.height = "40vh"
+                      document.getElementsByClassName("Continue-btn").removeAttribute('disabled', false)
                       setOriginCity(`${item.city}`)
                     }} key={index}>
                       <Icon style={{ color: "#B770FE", marginRight: "10px", fontSize: "24px" }} icon="cil:location-pin" />
@@ -94,7 +97,7 @@ function SelectDestination(props) {
               }
             </div>
           </div>
-          <button id='confirm-origin' style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn' disabled>Confirm</button>
+          <button onClick={confirmOrigin} id='confirm-origin' style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn' disabled>Confirm</button>
         </div>
       </div>
     </div>

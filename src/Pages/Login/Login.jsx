@@ -1,3 +1,4 @@
+//imports
 import React, { useState } from 'react'
 import Logo from '../../assets/img/LogoGirney.png'
 import GoogleIcon from '../../assets/img/googleIcon.png'
@@ -10,6 +11,8 @@ import { endpoint } from '../../defz'
 import { setUserNumber } from '../../redux/auth/userActions'
 import { useDispatch } from 'react-redux'
 import { route_loginVerify } from '../../defz'
+// import { BiSearch } from 'react-icons/bi'
+//imports
 
 function Login() {
   const dispatch = useDispatch();
@@ -62,16 +65,13 @@ function Login() {
             <PhoneInput
               name="phoneNumber"
               type="number"
-              regions={['north-america', 'south-america', 'central-america', 'carribean', 'eu-union', 'ex-ussr', 'ex-yugos', 'baltic', 'middle-east', 'north-africa']}
-              enableAreaCodes={true}
               enableSearch={true}
-              areaCodes={{ us: ["332"] }}
-              inputProps={{
-                name: "phone",
-                country: "us",
-                required: true,
-                autoFocus: true
-              }}
+              // inputProps={{
+              //   name: "phone",
+              //   country: "us",
+              //   required: true,
+              //   autoFocus: true
+              // }}
               value={phone}
               onChange={handleOnChange}
               // Set your inline styles here

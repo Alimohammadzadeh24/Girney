@@ -1,3 +1,4 @@
+//imports
 import React from 'react'
 import FlyAirplane from '../../assets/img/flyAirplane.png'
 import Avatars from '../../assets/img/FinalAvatars.png'
@@ -7,6 +8,7 @@ import './Final.css'
 import { useSelector } from 'react-redux'
 import { selectUserState } from '../../redux/auth/userReucer'
 import { route_visa } from '../../defz'
+//imports
 
 function Final() {
     const userState = useSelector(selectUserState)

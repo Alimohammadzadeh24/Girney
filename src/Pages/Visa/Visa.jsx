@@ -1,31 +1,40 @@
+//imports
 import React, { useState } from 'react'
 import MenuVisa from '../../assets/img/menuVisa.png'
 import Avatar from '../../assets/img/Avatar.png'
 import './Visa.css'
 import SelectOrigin from '../../components/SelectOrigin/SelectOrigin'
 import SelectDestination from '../../components/SelectDestination/SelectDestination'
-import $ from 'jquery'
 import { connect } from 'react-redux'
 import { route_final } from '../../defz'
+//imports
+
 function Visa({ state }) {
     const [showOriginSelector, setShowOriginSelector] = useState(false)
     const [showDestinationSelector, setShowDestinationSelector] = useState(false)
     console.log(state);
+    const img1 = document.getElementsByClassName("img1")
+    const img2 = document.getElementsByClassName("img2")
+    const img3 = document.getElementsByClassName("img3")
     if (state.origin !== '') {
-        $('.img1').addClass('img1-done').removeClass('img1')
-        $('.img2').css({ "margin-left": "0px" })
-        $('.img3').css({ "margin-left": "0px" })
-        $('#btn2').attr('disabled', false)
-        $('#btn2').on('click', () => {
+        img1.classList.add('img1-done')
+        img1.classList.remove('img1')
+        // $('.img2').css({ "margin-left": "0px" })
+        // $('.img3').css({ "margin-left": "0px" })
+        document.getElementById("btn2").setAttribute('disabled', false)
+        document.getElementById("btn2").addEventListener('click', () => {
             setShowDestinationSelector(true)
         })
     }
     if (state.destination !== '') {
-        $('.img2').addClass('img2-done').removeClass('img2')
-        $('#btn3').attr('disabled', false)
-        $('#btn3').on('click', (e) => {
+        const btn3 = document.getElementById("btn3")
+        img2.classList.add('img2-done')
+        img2.classList.remove('img2')
+        btn3.setAttribute('disabled', false)
+        btn3.addEventListener('click', (e) => {
             e.preventDefault();
-            $('.img3').addClass('img3-done').removeClass('img3')
+            img3.classList.add('img3-done')
+            img3.classList.remove('img3')
             setTimeout(() => {
                 window.location.href = route_final;
             }, 1000)

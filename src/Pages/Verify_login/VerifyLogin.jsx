@@ -1,3 +1,4 @@
+//imports
 // import React, { useState } from 'react'
 import './VerifyLogin.css'
 import MessageIcon from '../../assets/img/MessageIcon.png'
@@ -8,6 +9,7 @@ import { endpoint, route_visa } from '../../defz';
 import { useSelector } from 'react-redux';
 import { selectUserState } from '../../redux/auth/userReucer';
 import { route_login } from '../../defz';
+//imports
 
 function VerifyLogin() {
   const userState = useSelector(selectUserState)
