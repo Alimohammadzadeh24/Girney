@@ -2,7 +2,7 @@
 import './SelectOrigin.css'
 import React, { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react';
-import CountryData from '../../CountruData.json'
+import CountryData from '../../app/CountruData.json'
 import { IoIosArrowBack } from 'react-icons/io'
 import { useDispatch } from 'react-redux';
 import { setUserOrigin } from '../../redux/auth/userActions';
@@ -13,13 +13,17 @@ function SelectDestination(props) {
   const closeSelect = () => {
     props.Closer(false)
   }
+
+  //define and create state and variable with hooks and document element
   const [searchedArray, setSearchedArray] = useState(CountryData);
   const [searchString, setSearchString] = useState("");
   const [originCity, setOriginCity] = useState("")
   const inputBottomText = document.getElementsByClassName("input-bottom-txt")
   const originListBox = document.getElementsByClassName("origin-list-box")
   const boxSelectOrigin = document.getElementsByClassName("box-selectOrigin")
+  //define and create state and variable with hooks and document element
 
+  //create show search resualt after search on input with useEffect
   useEffect(() => {
     if (searchString.length === 0) {
       setSearchedArray(CountryData)
@@ -36,6 +40,8 @@ function SelectDestination(props) {
       setSearchedArray(searchedObjects)
     }
   }, [searchString])
+//create show search resualt after search on input with useEffect
+
   //change component element style with search input status----------
   const checkValueInput = (e) => {
     setSearchString(e.target.value)

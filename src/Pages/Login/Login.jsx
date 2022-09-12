@@ -7,11 +7,10 @@ import './Login.css'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css'
 import toast, { Toaster } from 'react-hot-toast';
-import { endpoint } from '../../defz'
+import { endpoint } from '../../app/defz'
 import { setUserNumber } from '../../redux/auth/userActions'
 import { useDispatch } from 'react-redux'
-import { route_loginVerify } from '../../defz'
-// import { BiSearch } from 'react-icons/bi'
+import { route_loginVerify } from '../../app/defz'
 //imports
 
 function Login() {
@@ -24,6 +23,7 @@ function Login() {
     "phone_number": `+${phone}`
   }
 
+  //send request to server and get verify code with click on button
   const sendReq = async (e) => {
     e.preventDefault();
     if (phone === "") {
@@ -46,6 +46,8 @@ function Login() {
       })
     }
   }
+  //send request to server and get verify code with click on button
+
   return (
     <div className='Login-container'>
       <Toaster
@@ -66,12 +68,6 @@ function Login() {
               name="phoneNumber"
               type="number"
               enableSearch={true}
-              // inputProps={{
-              //   name: "phone",
-              //   country: "us",
-              //   required: true,
-              //   autoFocus: true
-              // }}
               value={phone}
               onChange={handleOnChange}
               // Set your inline styles here

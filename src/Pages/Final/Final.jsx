@@ -7,14 +7,21 @@ import { BsShare } from 'react-icons/bs'
 import './Final.css'
 import { useSelector } from 'react-redux'
 import { selectUserState } from '../../redux/auth/userReucer'
-import { route_visa } from '../../defz'
+import { route_visa } from '../../app/defz'
 //imports
 
 function Final() {
+
+    //get and select state from redux store and save on userState variable
     const userState = useSelector(selectUserState)
+    //get and select state from redux store and save on userState variable
+
+    //back to visa page for edit origin and destination with click on arrow back icon on top screen
     const goPreviousPage = () => {
         window.location.href = route_visa
     }
+    //back to visa page for edit origin and destination with click on arrow back icon on top screen
+    
     return (
         <div className='final-container'>
             <div className='final-header'>

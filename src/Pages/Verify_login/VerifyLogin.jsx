@@ -5,19 +5,20 @@ import MessageIcon from '../../assets/img/MessageIcon.png'
 import toast, { Toaster } from 'react-hot-toast';
 import VerificationInput from "react-verification-input";
 import { Icon } from '@iconify/react';
-import { endpoint, route_visa } from '../../defz';
+import { endpoint, route_visa } from '../../app/defz';
 import { useSelector } from 'react-redux';
 import { selectUserState } from '../../redux/auth/userReucer';
-import { route_login } from '../../defz';
+import { route_login } from '../../app/defz';
 //imports
 
 function VerifyLogin() {
   const userState = useSelector(selectUserState)
-  console.log(userState);
   // const [code, setCode] = useState("111234")
   const code = "111234"
   // const codeVerifyOnChange = e => {
   // }
+
+  //send verify login request to server with click on blogin button
   const LoginButton = async (e) => {
     e.preventDefault();
     toast.error("Please Enter The Right Code")
@@ -37,9 +38,14 @@ function VerifyLogin() {
       }
     })
   }
+  //send verify login request to server with click on blogin button
+
+  //back to login page with click on back to login text
   const backToLogin = () => {
     window.location.href = route_login
   }
+  //back to login page with click on back to login text
+
   return (
     <div className='VerifyLogin-container'>
       <Toaster
@@ -74,10 +80,6 @@ function VerifyLogin() {
           <div style={{ marginBottom: "32px" }}>
             <span className='text-agains'>Didn't receive the email?</span> <span style={{ color: "#8D1EFD" }} className='text-agains'> Click to resend</span>
           </div>
-          {/* <div>
-            <img src={GmailIcon} alt="" />
-            <h3>Opening Gmail App</h3>
-          </div> */}
           <span
             style={{
               display: "flex",
