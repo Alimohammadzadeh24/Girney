@@ -42,7 +42,7 @@ function Login() {
       }).then(()=>{
         setTimeout(() => {
           window.location.href = route_loginVerify
-        }, 2000);
+        }, 1000);
       })
     }
   }
