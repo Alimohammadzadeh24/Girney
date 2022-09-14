@@ -2,7 +2,7 @@
 import './SelectDestination.css'
 import React, { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react';
-import CountryData from '../../app/CountruData.json'
+import CountryData from '../../CountruData.json'
 import { IoIosArrowBack } from 'react-icons/io'
 import { setUserDestination } from '../../redux/auth/userActions';
 import { useDispatch } from 'react-redux';

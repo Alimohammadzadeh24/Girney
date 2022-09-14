@@ -7,10 +7,11 @@ import './Login.css'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css'
 import toast, { Toaster } from 'react-hot-toast';
-import { endpoint } from '../../app/defz'
+import { endpoint } from '../../defz'
 import { setUserNumber } from '../../redux/auth/userActions'
 import { useDispatch } from 'react-redux'
-import { route_loginVerify } from '../../app/defz'
+import { route_loginVerify } from '../../defz'
+import useDetectKeyboardOpen from "use-detect-keyboard-open";
 //imports
 
 function Login() {
@@ -19,9 +20,10 @@ function Login() {
   var handleOnChange = (value) => {
     setPhone(value)
   };
-  const reqBody = {
-    "phone_number": `+${phone}`
-  }
+
+  //keyboard status detector 
+  const isKeyboardOpen = useDetectKeyboardOpen();
+  //keyboard status detector
 
   //send request to server and get verify code with click on button
   const sendReq = async (e) => {
@@ -34,15 +36,17 @@ function Login() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: reqBody
+        body: {
+          "phone_number": `+${phone}`
+        }
       }).then((res) => {
         if (res.status === 204) {
           dispatch(setUserNumber(phone))
+          toast.success("Code sent")
+          setTimeout(() => {
+            window.location.href = route_loginVerify
+          }, 1000);
         }
-      }).then(()=>{
-        setTimeout(() => {
-          window.location.href = route_loginVerify
-        }, 1000);
       })
     }
   }
@@ -60,7 +64,9 @@ function Login() {
           <span className='title-txts'>Welcome to Girney</span>
           <span className='ch-txts'>Please enter your detailes.</span>
         </div>
-        <span className='ch-txts'>Sign in</span>
+        <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <span className='ch-txts'>Sign in</span>
+        </div>
         <hr style={{ marginTop: "8px" }} />
         <div className="email-section">
           <div className="btns">
@@ -97,7 +103,7 @@ function Login() {
               }}
               required
             />
-            <button onClick={sendReq} className='Continue-btn'>Continue with phone number</button>
+            {isKeyboardOpen ? null : <button onClick={sendReq} className='Continue-btn'>Continue with phone number</button>}
           </div>
         </div>
         <div className="or">
@@ -125,7 +131,6 @@ function Login() {
             </button>
           </div>
         </div>
-
       </div>
     </div>
   )

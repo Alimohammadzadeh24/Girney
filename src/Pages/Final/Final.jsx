@@ -7,7 +7,7 @@ import { BsShare } from 'react-icons/bs'
 import './Final.css'
 import { useSelector } from 'react-redux'
 import { selectUserState } from '../../redux/auth/userReucer'
-import { route_visa } from '../../app/defz'
+import { route_visa } from '../../defz'
 //imports
 
 function Final() {

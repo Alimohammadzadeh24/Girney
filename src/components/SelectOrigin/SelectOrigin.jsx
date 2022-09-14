@@ -2,10 +2,11 @@
 import './SelectOrigin.css'
 import React, { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react';
-import CountryData from '../../app/CountruData.json'
+import CountryData from '../../CountruData.json'
 import { IoIosArrowBack } from 'react-icons/io'
 import { useDispatch } from 'react-redux';
 import { setUserOrigin } from '../../redux/auth/userActions';
+import useDetectKeyboardOpen from "use-detect-keyboard-open";
 //imports
 
 function SelectDestination(props) {
@@ -22,6 +23,10 @@ function SelectDestination(props) {
   const originListBox = document.getElementsByClassName("origin-list-box")
   const boxSelectOrigin = document.getElementsByClassName("box-selectOrigin")
   //define and create state and variable with hooks and document element
+
+  //keyboard status detector 
+  const isKeyboardOpen = useDetectKeyboardOpen();
+  //keyboard status detector
 
   //create show search resualt after search on input with useEffect
   useEffect(() => {
@@ -40,7 +45,7 @@ function SelectDestination(props) {
       setSearchedArray(searchedObjects)
     }
   }, [searchString])
-//create show search resualt after search on input with useEffect
+  //create show search resualt after search on input with useEffect
 
   //change component element style with search input status----------
   const checkValueInput = (e) => {

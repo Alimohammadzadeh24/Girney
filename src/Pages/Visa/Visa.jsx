@@ -6,7 +6,7 @@ import './Visa.css'
 import SelectOrigin from '../../components/SelectOrigin/SelectOrigin'
 import SelectDestination from '../../components/SelectDestination/SelectDestination'
 import { useSelector } from 'react-redux'
-import { route_final } from '../../app/defz'
+import { route_final } from '../../defz'
 import { selectUserState } from '../../redux/auth/userReucer'
 //imports
 

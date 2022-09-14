@@ -5,10 +5,10 @@ import MessageIcon from '../../assets/img/MessageIcon.png'
 import toast, { Toaster } from 'react-hot-toast';
 import VerificationInput from "react-verification-input";
 import { Icon } from '@iconify/react';
-import { endpoint, route_visa } from '../../app/defz';
+import { endpoint, route_visa } from '../../defz';
 import { useSelector } from 'react-redux';
 import { selectUserState } from '../../redux/auth/userReucer';
-import { route_login } from '../../app/defz';
+import { route_login } from '../../defz';
 //imports
 
 function VerifyLogin() {
@@ -21,22 +21,27 @@ function VerifyLogin() {
   //send verify login request to server with click on blogin button
   const LoginButton = async (e) => {
     e.preventDefault();
-    toast.error("Please Enter The Right Code")
-    const verifyCodeReqBody = {
-      "phone_number": "+989025235394",
-      "otp": code
+    if (code === "") {
+      toast.error("Please Enter The Right Code")
+    } else {
+      await fetch(`${endpoint}/users/auth/otp/verify`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: {
+          "phone_number": userState.phone_number,
+          "otp": code
+        }
+      }).then(response => {
+        if (response.status === 204) {
+          toast.success("Login successfully")
+          setTimeout(() => {
+            window.location.href = route_visa
+          }, 1000);
+        }
+      })
     }
-    await fetch(`${endpoint}/users/auth/otp/verify`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: verifyCodeReqBody
-    }).then(response => {
-      if (response.status === 204) {
-        window.location.href = route_visa
-      }
-    })
   }
   //send verify login request to server with click on blogin button
 
