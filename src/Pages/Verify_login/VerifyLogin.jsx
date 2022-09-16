@@ -1,5 +1,5 @@
 //imports
-// import React, { useState } from 'react'
+import React, { useState } from 'react'
 import './VerifyLogin.css'
 import MessageIcon from '../../assets/img/MessageIcon.png'
 import toast, { Toaster } from 'react-hot-toast';
@@ -13,17 +13,15 @@ import { route_login } from '../../defz';
 
 function VerifyLogin() {
   const userState = useSelector(selectUserState)
-  // const [code, setCode] = useState("111234")
-  const code = "111234"
-  // const codeVerifyOnChange = e => {
-  // }
+  const [code, setCode] = useState("")
+  const codeVerifyOnChange = e => {
+    setCode(e)
+  }
 
   //send verify login request to server with click on blogin button
   const LoginButton = async (e) => {
     e.preventDefault();
-    if (code === "") {
-      toast.error("Please Enter The Right Code")
-    } else {
+    if(code.length === 6) {
       await fetch(`${endpoint}/users/auth/otp/verify`, {
         method: 'POST',
         headers: {
@@ -41,6 +39,8 @@ function VerifyLogin() {
           }, 1000);
         }
       })
+    }else{
+      toast.error("Please enter the right code")
     }
   }
   //send verify login request to server with click on blogin button
@@ -69,7 +69,7 @@ function VerifyLogin() {
           <div style={{ marginBottom: "26px" }}>
             <VerificationInput
               // value={code}
-              // onChange={codeVerifyOnChange}
+              onChange={codeVerifyOnChange}
               placeholder=' '
               length={6}
               classNames={{
