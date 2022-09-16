@@ -14,14 +14,13 @@ function SelectDestination(props) {
     props.Closer(false)
   }
 
-    //define and create state and variable with hooks and document element
+  //define and create state and variable with hooks and document element
   const [searchedArray, setSearchedArray] = useState(CountryData);
   const [searchString, setSearchString] = useState("");
-  const [destinationCity, setDestinationCity] = useState("")
-  const inputBottomText = document.getElementsByClassName("input-bottom-txt")
-  const originListBox = document.getElementsByClassName("origin-list-box")
-  const boxSelectOrigin = document.getElementsByClassName("box-selectOrigin")
-    //define and create state and variable with hooks and document element
+  const [destinationCity, setDestinationCity] = useState("");
+  const [searchInputValueStatus, setSearchInputValueStatus] = useState(false);
+  const [DestinationContinue, setDestinationContinue] = useState(false);
+  //define and create state and variable with hooks and document element
 
   //create show search resualt after search on input with useEffect
   useEffect(() => {
@@ -45,14 +44,10 @@ function SelectDestination(props) {
   //change component element style with search input status----------
   const checkValueInput = (e) => {
     setSearchString(e.target.value)
-    if (e.target.value !== "") {
-      inputBottomText.style.display = "none";
-      originListBox.style.display = "block";
-      boxSelectOrigin.style.height = "100vh";
+    if (searchString !== "") {
+      setSearchInputValueStatus(true)
     } else {
-      inputBottomText.style.display = "block";
-      originListBox.style.display = "none";
-      boxSelectOrigin.style.height = "40vh";
+      setSearchInputValueStatus(false)
     }
   }
   //change component element style with search input status----------
@@ -68,31 +63,36 @@ function SelectDestination(props) {
     <div className='SelectOrigin-Container'>
       <section onClick={closeSelect} style={{ color: "#ffffff" }} className='empty-div'>
       </section>
-      <div className="box-selectOrigin">
+      <div style={{
+        height: searchInputValueStatus ? '100vh' : '40vh'
+      }}
+        className="box-selectOrigin">
         <div className="selectOriginDivs">
           <div className='header-sOrigin'>
             <div onClick={closeSelect} style={{ width: "32px", height: "32px" }}>
               <IoIosArrowBack color='#FFFFFF' fontSize={'24px'} />
             </div>
-            <span style={{ position: "absolute", left: "0", right: "0" }} className='title-txts'>Destination</span>
+            <span style={{ position: "absolute", left: "0", right: "0" }} className='title-txts'>Origin</span>
             <span></span>
           </div>
           <span className='ch-txts'>Pleasse select your city.</span>
           <div className="OriginCity">
-            <label>Destination city</label>
+            <label>Origin city</label>
             <input className='origin-input' value={searchString} onChange={checkValueInput} />
-            <span className='input-bottom-txt'>Enter your city name Please</span>
-            <div className="origin-list-box">
+            <span style={{
+              display: searchInputValueStatus ? 'none' : 'block'
+            }} className='input-bottom-txt'>Enter your city name Please</span>
+            <div style={{
+              display: searchInputValueStatus ? 'block' : 'none'
+            }} className="origin-list-box">
               {
                 searchedArray.map((item, index) => {
                   return (
                     <div className='OriginsItem' onClick={() => {
-                      originListBox.style.display = "none"
-                      document.getElementsByClassName("origin-input").value = `${item.city}`
-                      inputBottomText.style.display = "block"
-                      boxSelectOrigin.style.height = "40vh"
-                      document.getElementsByClassName("Continue-btn").removeAttribute('disabled', false)
+                      setSearchInputValueStatus(false)
                       setDestinationCity(`${item.city}`)
+                      setDestinationContinue(true)
+                      document.getElementsByClassName("origin-input").value = `${item.city}`
                     }} key={index}>
                       <Icon style={{ color: "#B770FE", marginRight: "10px", fontSize: "24px" }} icon="cil:location-pin" />
                       <span className='origins-country'>{item.country},</span>
@@ -103,7 +103,7 @@ function SelectDestination(props) {
               }
             </div>
           </div>
-          <button onClick={confirmDestination} id='confirm-origin' style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn' disabled>Confirm</button>
+          <button onClick={confirmDestination} id='confirm-origin' style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn' disabled={!DestinationContinue}>Confirm</button>
         </div>
       </div>
     </div>

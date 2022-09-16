@@ -20,43 +20,42 @@ function Visa() {
     //create state and variable with hooks and document elelment
     const [showOriginSelector, setShowOriginSelector] = useState(false)
     const [showDestinationSelector, setShowDestinationSelector] = useState(false)
-    const img1 = document.getElementsByClassName("img1")
-    const img2 = document.getElementsByClassName("img2")
-    const img3 = document.getElementsByClassName("img3")
+    const [img1, setImg1] = useState(false)
+    const [img2, setImg2] = useState(false)
+    const [img3, setImg3] = useState(false)
+    const [btn2Disable, setBtn2Disable] = useState(true)
+    const [btn3Disable, setBtn3Disable] = useState(true)
     //create state and variable with hooks and document elelment
 
     //change desiable/enable button style with redux state status
     if (userState.origin !== '') {
-        img1.classList.add('img1-done')
-        img1.classList.remove('img1')
-        // $('.img2').css({ "margin-left": "0px" })
-        // $('.img3').css({ "margin-left": "0px" })
-        document.getElementById("btn2").setAttribute('disabled', false)
-        document.getElementById("btn2").addEventListener('click', () => {
-            setShowDestinationSelector(true)
-        })
+        setImg1(true)
+        setBtn2Disable(false)
     }
     if (userState.destination !== '') {
-        const btn3 = document.getElementById("btn3")
-        img2.classList.add('img2-done')
-        img2.classList.remove('img2')
-        btn3.setAttribute('disabled', false)
-        btn3.addEventListener('click', (e) => {
-            e.preventDefault();
-            img3.classList.add('img3-done')
-            img3.classList.remove('img3')
-            setTimeout(() => {
-                window.location.href = route_final;
-            }, 1000)
-        })
+        setImg2(true)
+        setBtn3Disable(false)
     }
     //change desiable/enable button style with redux state status
 
-    //show origin component with click on origin button
+    //show origin/Destination component with click on origin/Destination button
     const showSelectOrigin = () => {
         setShowOriginSelector(true)
     }
-    //show origin component with click on origin button
+    const showSelectDestination = () => {
+        setShowDestinationSelector(true)
+    }
+    //show origin/Destination component with click on origin/Destination button
+
+    //define onClick from Continue to Final Step Button
+    const continueToFinal = (e) => {
+        e.preventDefault();
+        setImg3(true)
+        setTimeout(() => {
+            window.location.href = route_final;
+        }, 1000)
+    }
+    //define onClick from Continue to Final Step Button
 
     return (
         <div className='visa-container'>
@@ -71,21 +70,25 @@ function Visa() {
                 </div>
                 <div className="wizard-start">
                     <div className="wizard">
-                        <div className="img1"> </div>
+                        <div className={img1 ? 'img1-done' : 'img1'}> </div>
                         <div className="text-box">
                             <span className='wizard-title'>Enter your Origin</span>
                             <span className='wizard-desc'>Please select your city</span>
                         </div>
                     </div>
                     <div className="wizard">
-                        <div className="img2"> </div>
+                        <div style={{
+                            marginLeft: img1 ? '0px' : null
+                        }} className={img2 ? 'img2-done' : 'img2'}> </div>
                         <div className="text-box">
                             <span className='wizard-title'>Enter your Destination</span>
                             <span className='wizard-desc'>Please select your Destination city</span>
                         </div>
                     </div>
                     <div className="wizard">
-                        <div className="img3"> </div>
+                        <div style={{
+                            marginLeft: img1 ? '0px' : null
+                        }} className={img3 ? 'img3-done' : 'img3'}> </div>
                         <div className="text-box">
                             <span className='wizard-title'>Press continue button</span>
                             <span className='wizard-desc'>we will direct you to the embassy wbsite</span>
@@ -94,8 +97,8 @@ function Visa() {
                 </div>
                 <div className="visa-buttons">
                     <button id='btn1' onClick={showSelectOrigin} className='visa-btn'>{userState.origin !== '' ? `${userState.origin}` : "Enter Your Origin"}</button>
-                    <button id='btn2' className='visa-btn' disabled>{userState.destination !== '' ? `${userState.destination}` : "Enter Your Destination"}</button>
-                    <button id='btn3' className='visa-btn' disabled>Continue</button>
+                    <button id='btn2' onClick={showSelectDestination} className='visa-btn' disabled={btn2Disable}>{userState.destination !== '' ? `${userState.destination}` : "Enter Your Destination"}</button>
+                    <button id='btn3' onClick={continueToFinal} className='visa-btn' disabled={btn3Disable}>Continue</button>
                 </div>
             </div>
             {showOriginSelector === true ? <SelectOrigin Closer={setShowOriginSelector} /> : null}
