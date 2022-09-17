@@ -78,7 +78,7 @@ function SelectDestination(props) {
             <span style={{ position: "absolute", left: "0", right: "0" , textAlign: "center" }} className='title-txts'>Origin</span>
             <span></span>
           </div>
-          <span className='ch-txts'>Pleasse select your city.</span>
+          <span className='ch-txts'>Please select your city.</span>
           <div className="OriginCity">
             <label>Origin city</label>
             <input className='origin-input' value={searchString} onChange={checkValueInput} />
@@ -94,8 +94,8 @@ function SelectDestination(props) {
                     <div className='OriginsItem' onClick={() => {
                       setSearchInputValueStatus(false)
                       setOriginCity(`${item.city}`)
+                      setSearchString(`${item.city}`)
                       setOriginContinue(true)
-                      document.getElementsByClassName("origin-input").value = `${item.city}`
                     }} key={index}>
                       <Icon style={{ color: "#B770FE", marginRight: "10px", fontSize: "24px" }} icon="cil:location-pin" />
                       <span className='origins-country'>{item.country},</span>
@@ -106,7 +106,7 @@ function SelectDestination(props) {
               }
             </div>
           </div>
-          <button onClick={confirmOrigin} id='confirm-origin' style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn' disabled={!originContinue}>Confirm</button>
+          {isKeyboardOpen ? null : <button onClick={confirmOrigin} id='confirm-origin' style={{ position: "absolute", bottom: "0", width: "90vw" }} className='Continue-btn' disabled={!originContinue}>Confirm</button>}
         </div>
       </div>
     </div>
