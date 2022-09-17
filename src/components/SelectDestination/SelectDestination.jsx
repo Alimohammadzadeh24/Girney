@@ -72,12 +72,12 @@ function SelectDestination(props) {
             <div onClick={closeSelect} style={{ width: "32px", height: "32px" }}>
               <IoIosArrowBack color='#FFFFFF' fontSize={'24px'} />
             </div>
-            <span style={{ position: "absolute", left: "0", right: "0" }} className='title-txts'>Origin</span>
+            <span style={{ position: "absolute", left: "0", right: "0" , textAlign : "center" }} className='title-txts'>Destination</span>
             <span></span>
           </div>
           <span className='ch-txts'>Pleasse select your city.</span>
           <div className="OriginCity">
-            <label>Origin city</label>
+            <label>Destination city</label>
             <input className='origin-input' value={searchString} onChange={checkValueInput} />
             <span style={{
               display: searchInputValueStatus ? 'none' : 'block'

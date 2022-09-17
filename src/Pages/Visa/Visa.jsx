@@ -1,8 +1,8 @@
 //imports
-import React, { useState } from 'react'
+import './Visa.css'
+import React, { useEffect, useState } from 'react'
 import MenuVisa from '../../assets/img/menuVisa.png'
 import Avatar from '../../assets/img/Avatar.png'
-import './Visa.css'
 import SelectOrigin from '../../components/SelectOrigin/SelectOrigin'
 import SelectDestination from '../../components/SelectDestination/SelectDestination'
 import { useSelector } from 'react-redux'
@@ -13,30 +13,31 @@ import { selectUserState } from '../../redux/auth/userReucer'
 function Visa() {
 
     //get state from redux store and show on console
-    const userState = useSelector(selectUserState)
-    console.log(userState);
+    const userState = useSelector(selectUserState);
     //get state from redux store and show on console
 
     //create state and variable with hooks and document elelment
     const [showOriginSelector, setShowOriginSelector] = useState(false)
     const [showDestinationSelector, setShowDestinationSelector] = useState(false)
+    const [btn2Disable, setBtn2Disable] = useState(true)
+    const [btn3Disable, setBtn3Disable] = useState(true)
     const [img1, setImg1] = useState(false)
     const [img2, setImg2] = useState(false)
     const [img3, setImg3] = useState(false)
-    const [btn2Disable, setBtn2Disable] = useState(true)
-    const [btn3Disable, setBtn3Disable] = useState(true)
     //create state and variable with hooks and document elelment
 
-    //change desiable/enable button style with redux state status
-    if (userState.origin !== '') {
-        setImg1(true)
-        setBtn2Disable(false)
-    }
-    if (userState.destination !== '') {
-        setImg2(true)
-        setBtn3Disable(false)
-    }
-    //change desiable/enable button style with redux state status
+    //change desiable/enable button style with redux state status and complete wizard setup
+    useEffect(() => {
+        if (userState.origin !== '') {
+            setImg1(true)
+            setBtn2Disable(false)
+        }
+        if (userState.destination !== '') {
+            setImg2(true)
+            setBtn3Disable(false)
+        }
+    })
+    //change desiable/enable button style with redux state status and complete wizard setup
 
     //show origin/Destination component with click on origin/Destination button
     const showSelectOrigin = () => {
@@ -64,7 +65,7 @@ function Visa() {
                     <img src={MenuVisa} alt="" />
                     <img src={Avatar} alt="" />
                 </div>
-                <div className="start-section">
+                <div style={{textAlign : "center"}} className="start-section">
                     <span className='title-txts'>Start your Girney</span>
                     <span className='ch-txts'>We are Going to help you get your visa in just 3 simple steps</span>
                 </div>

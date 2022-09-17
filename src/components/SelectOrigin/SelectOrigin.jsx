@@ -75,7 +75,7 @@ function SelectDestination(props) {
             <div onClick={closeSelect} style={{ width: "32px", height: "32px" }}>
               <IoIosArrowBack color='#FFFFFF' fontSize={'24px'} />
             </div>
-            <span style={{ position: "absolute", left: "0", right: "0" }} className='title-txts'>Origin</span>
+            <span style={{ position: "absolute", left: "0", right: "0" , textAlign: "center" }} className='title-txts'>Origin</span>
             <span></span>
           </div>
           <span className='ch-txts'>Pleasse select your city.</span>

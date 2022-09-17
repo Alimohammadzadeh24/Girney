@@ -9,16 +9,20 @@
     position: relative;
 }
 .final-header {
+    width: 90vw;
     margin-top: 20px;
+    margin-bottom: 16px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
     position: relative;
-    width: 90vw;
 }
 .fly-box {
     margin: 32px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .shareLink-box {
     margin: 0 5vw;

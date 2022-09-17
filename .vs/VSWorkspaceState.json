@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\Pages",
-    "\\src\\Pages\\Verify_login"
+    "\\src\\components",
+    "\\src\\components\\SelectDestination",
+    "\\src\\components\\SelectOrigin"
   ],
-  "SelectedNode": "\\src\\Pages\\Verify_login\\VerifyLogin.css",
+  "SelectedNode": "\\src\\components\\SelectDestination\\SelectDestination.jsx",
   "PreviewInSolutionExplorer": false
 }
